@@ -1,0 +1,26 @@
+%form#feedback.view
+  .dashboard_logo
+    %img{ :src => "images/yeapsy_logo.png", :alt => "YeapsY logo" }
+  %h3
+    %i.icon-envelope
+    = " Feedback"
+  %fieldset
+    %table.table_info
+      %tr
+        %td
+          %label From
+        %td#feedback_username
+      %tr
+        %td
+          %label Feedback
+        %td
+          %textarea{ :name => "feedback" }
+      %tr
+        %td
+        %td
+          %button{ :type => "submit" }
+            %i.icon-ok
+            = " Submit"
+          %button{ :type => "reset" }
+            %i.icon-undo
+            = " Reset"

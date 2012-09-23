@@ -1,0 +1,121 @@
+#dashboard.view
+  #dashboard_content
+    %h3
+      %i.icon-home
+      = " Dashboard"
+    %table{ :style => "width: 100%" }
+      %tr
+        %td{ :style => "width: 50%; padding-right: 25px;" }
+          %table.table_dashboard
+            %tr
+              %td.img.user_img
+              %td
+                %table.inner_table
+                  %tr
+                    %th.header{ :colspan => "2" }
+                      Welcome
+                      %span.name
+                      !
+                  %tr
+                    %td.left Username:
+                    %td.right
+                      %span.username
+                  %tr
+                    %td.left Email:
+                    %td.right
+                      %span.email
+                  %tr
+                    %td.left Country:
+                    %td.right
+                      %span.country
+                  %tr
+                    %td.left{ :style => "border: none" }
+                    %td.right{ :style => "border: none" }
+                      %a.show{ :href => "#my_profile" }
+                        See&nbsp;your&nbsp;full&nbsp;profile
+
+          %table.table_dashboard{ :style => "margin-left:auto" }
+            %tr
+              %td.img
+                %img{:width => "130",
+                     :src => "images/yeapsy_logo.png", :alt => "yeapsy logo" }
+              %td
+                %table.inner_table
+                  %tr
+                    %th.header About YeapsY
+                  %tr
+                    %td{ :style => "border: none" }
+                      %p YeapsY is an online platform to ease the process of applying for an event, review the applications, and selecting participants. It is focused on simplicity, data control and privacy protection.
+                      %p Yeapsy intends to make things easy, but it is a very young project. Please forgive any misbehaviours that may happen and help us fix them by filling in the feedback form.
+                  %tr
+                    %td.right{ :style => "border: none" }
+                      %a{:target => "_blank",
+                         :href => "http://www.twitter.com/yeapsy" }
+                        %i.icon-twitter
+                          &nbsp;Follow&nbsp;YeapsY&nbsp;on&nbsp;Twitter
+                  %tr
+                    %td{ :style => "border: none" }
+                      %p
+                        %b Latest news from Twitter:
+                      %ul#tweets
+                        %li Loading latest news from Twitter...
+          
+
+        %td{ :style => "vertical-align: top; width: 50%; padding-left: 25px" }
+          %table.table_dashboard
+            %tr
+              %td.img
+                %i.icon-picture
+              %td
+                %table.inner_table
+                  %tr
+                    %th.header{ :colspan => "2" } Events
+                  %tr
+                    %td.left Calls for leaders:
+                    %td.right
+                      %span.n_call_leaders
+                  %tr
+                    %td.left Calls for participants:
+                    %td.right
+                      %span.n_call_participants
+                  %tr
+                    %td.left Total events
+                    %td.right
+                      %span.n_events
+                  %tr
+                    %td{ :style => "border: none" }
+                      %a.refresh{ :href => "#events" }
+                        %i.icon-refresh
+                        &nbsp;Refresh
+                    %td.right{ :style => "border: none" }
+                      %a.show{ :href => "#events" }
+                        See&nbsp;all&nbsp;the&nbsp;events
+
+          %table.table_dashboard
+            %tr
+              %td.img
+                %i.icon-file
+              %td
+                %table.inner_table
+                  %tr
+                    %th.header{ :colspan => "2" } Applications
+                  %tr
+                    %td.left Pending review:
+                    %td.right
+                      %span.n_apps_pending
+                  %tr
+                    %td.left Accepted:
+                    %td.right
+                      %span.n_apps_accepted
+                  %tr
+                    %td.left Total applications
+                    %td.right
+                      %span.n_apps
+                  %tr
+                    %td{ :style => "border: none" }
+                      %a.refresh{ :href => "#applications" }
+                        %i.icon-refresh
+                        &nbsp;Refresh
+                    %td.right{ :style => "border: none" }
+                      %a.show{ :href => "#applications" }
+                        See&nbsp;all&nbsp;your&nbsp;applications

@@ -1,0 +1,44 @@
+#profile_edit.view.narrow
+  %div
+    %h3
+      %i.icon-user
+      = " Edit profile"
+    .top_actions
+      %button#edit_profile_b
+        %i.icon-ok
+        = " Apply changes"
+      %button.show{ :value => "#my_profile" }
+        %i.icon-arrow-left
+        = " Back to profile"
+  %table{ :style => "width:100%" }
+    %tr
+      %td
+        %form#user_edit
+          %fieldset
+            %legend Profile information
+            %table#user_edit_table.table_info
+          %fieldset
+            %legend Change password
+            %table.table_info
+              %tr
+                %td.label
+                  %label Old password
+                %td
+                  %input{ :type => "password", :name => "old_password" }
+              %tr
+                %td.label
+                  %label New password
+                %td
+                  %input{ :type => "password", :name => "password" }
+              %tr
+                %td.label
+                  %label Confirm password
+                %td
+                  %input{ :type => "password", :name => "confirm_password" }
+          .bottom_actions
+            %button{ :type => "submit" }
+              %i.icon-ok
+              = " Apply changes"
+            %button.show{ :value => "#my_profile" }
+              %i.icon-arrow-left
+              = " Back to profile"

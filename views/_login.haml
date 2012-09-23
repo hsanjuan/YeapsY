@@ -1,0 +1,109 @@
+#login.view
+  #login_logo
+    %img{:src => "images/yeapsy_logo_login.png",
+         :alt => "YeapsY logo2",
+         :width => "300"}
+  %form#login_form.login_form
+    %fieldset
+      %table.table_info
+        %tr
+          %td.login_left
+            %label{ :for => "username" } Username or email
+          %td
+            %input{ :id => "username", :type => "text", :name => "username" }
+        %tr
+          %td.login_left
+            %label{ :for => "password" } Password
+          %td
+            %input{:id => "password", :type => "password", :name => "password" }
+        %tr
+          %td.login_left
+          %td
+            %button{ :type => "submit", :value => "login" }
+              %i.icon-key
+              &nbsp;Login
+            %button{ :type => "button", :id => "register" }
+              %i.icon-pencil
+              &nbsp;Register
+      %a.help{ :href => "#welcome_help", :style => "float:right;" } Help
+      %a#forgot_pw{ :href => "#", :style => "float:right; margin-right: 10px;" }
+        Forgot your password?
+
+  %form#reminder_form.login_form
+    %fieldset
+      %legend Reminder form
+      %table.table_info
+        %tr
+          %td.login_left
+            %label Username
+          %td
+            %input{ :type => "text", :name => "username" }
+        %tr
+          %td.login_left
+            %label Email
+          %td
+            %input{ :type => "text", :name => "email" }
+        %tr
+          %td.login_left
+          %td
+            %button{ :type => "submit", :value => "reminder" }
+              %i.icon-undo
+              &nbsp;Reset password
+      %a.back_login{ :href => "#", :style => "float:right;" }
+        Back to normal login
+  %form#user_register.login_form
+    %fieldset
+      %legend New user details
+      %table.table_info
+        %tr
+          %td.login_left
+            %label Username
+          %td
+            %input{:type => "text",
+                   :name => "username", :required => "required" }
+        %tr
+          %td.login_left
+            %label Password
+          %td
+            %input{:type => "password",
+                   :name => "password", :required => "required" }
+        %tr
+          %td.login_left
+            %label Confirm password
+          %td
+            %input{:type => "password",
+                   :name => "confirm", :required => "required" }
+        %tr
+          %td.login_left
+            %label Email
+          %td
+            %input{:type => "text",
+                   :name => "email", :required => "required" }
+        %tr
+          %td.login_left
+            %label
+              Human check.
+              %span#number1
+              &nbsp;&#43;&nbsp;
+              %span#number2
+              &nbsp;equals
+          %td
+            %input{:type => "text",
+                   :name => "test", :required => "required" }
+            %input{ :type => "hidden", :name => "number1" }
+            %input{ :type => "hidden", :name => "number2" }
+        %tr
+          %td{ :colspan => "2" }
+            %label
+              = "I agree with the "
+              %a{ :href => "tos", :target => "_blank" } Terms of Service
+              = "and the "
+              %a{ :href => "privacy", :target => "_blank" } Privacy Policy
+              = " of YeapsY"
+            %input{:type => "checkbox", :name => "agree", :value => "yes",
+                   :required => "required", :style => "float:right" }
+        %tr
+          %td.login_left
+          %td
+            %button{ :type => "submit" } Submit
+            %button.back_login{ :type => "reset" } Cancel

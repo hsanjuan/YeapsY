@@ -1,0 +1,26 @@
+#edit_event.view.narrow
+  %div
+    %h3 Edit event
+    .top_actions
+      %button#apply_changes_b
+        %i.icon-ok
+        = " Apply changes"
+      %button.show{ :value => "#event_info" }
+        %i.icon-arrow-left
+        = " Back to event info"
+      %button.help{ :value => "#event_create_edit_help" }
+        %i.icon-question-sign
+  %table{ :style => "width:100%" }
+    %tr
+      %td
+        %form#event_edit
+          %fieldset
+            %legend Event information
+            %table#event_edit_table.table_info
+          .bottom_actions
+            %button{ :type => "submit", :value => "#update_event" }
+              %i.icon-ok
+              = " Apply changes"
+            %button.show{ :value => "#event_info" }
+              %i.icon-arrow-left
+              = " Back to event info"

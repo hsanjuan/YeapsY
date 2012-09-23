@@ -1,0 +1,108 @@
+= haml :_news
+
+- begin
+  = haml :_ToS
+- rescue
+  #ToS.help_legal
+    Terms of service not available
+
+- begin
+  = haml :_privacy_policy
+- rescue
+  #privacy_policy.help_legal
+    Privacy policy not available
+
+#welcome_help.help
+  %h3 Hello there!
+  %p
+    YeapsY is a [new] event manager. It allows you to keep a profile with all the necessary information and to send applications more easily. It also allows you to keep this data under control, removing or updating it anytime.
+  %p
+    YeapsY lists all the events which are looking for participants in a neat way and allows you to track your applications and their state.
+  %p 
+    You only need a username and a valid email address to register. For any questions of problems please write to 
+    %a{ :href => "mailto:#{settings.yeapsy_config[:contact]}" }
+      = "#{settings.yeapsy_config[:contact]}"
+  %p 
+    For more information about YeapsY, visit 
+    %a{ :href => "http://www.yeapsy.com", :target => "_blank" } YeapsY.com
+
+#events_help.help
+  %p
+    Click on an event to get extended information and access to the application form.
+  %p 
+    Only those events which are published (calling for leaders or participants), or those that you have applied to are listed*.
+  %p
+    If you find a problem with an event, or need more information about it, please write to the event organizer.
+  %p
+    * Administrators and event leaders can also see those events they are involved with.
+
+#profile_help.help
+  %p
+    Your user profile gathers some information which is necessary in orden to participate in events.
+  %p
+    You can edit your profile by clicking on the "Edit profile" button. The profile picture is fetched from <a target="_blank" href="http://gravatar.com"><u>Gravatar</u></a> when available.
+  %p
+    The information in the profile is only made accesible to the administrators and leaders of the events that you apply to, along with the application information. The only exceptions to this are your username, your "About (public)" section and your picture (which depends on Gravatar).
+  %p
+    Note that applications to certain events may be rejected if your profile does not contains enough details. We recommend to fill in the profile, but you are free to choose which parts you want filled in.
+  %p
+    You can use the "About (private)" field to note down any special needs, i.e. "Im alergic to tomatoes", that may be important when participating in an event.
+  %p
+    You can delete your profile anytime. This will remove all your applications too.
+
+#event_create_edit_help.help
+  %p
+    Please provide as much information about the event as possible.
+  %p
+    Remember you can always come back and modify it.
+  %p
+    Only events in state "Call for participants" or "Call for leaders" are visible to regular users and accept submission of applications.
+  %p
+    Only event administrator and event leaders are able to see the applications for one event.
+
+#applications_help.help
+  %p
+    This view shows all your applications to different events and their current state.
+  %p
+    The are several states:
+
+  %ul
+    %li Pending review - Your application needs to be reviewed by the activity leaders
+    %li Accepted - Your application has been accepted
+    %li Rejected - Your application has been rejected
+    %li Waiting list - Your application has been placed in waiting list
+    %li Other
+
+  %p
+    You will receive an email when the state of your application changes. The leaders of activities will communicate to you directly via email to provide all the necessary details regarding the state of your application, for example, in case of acceptance
+  %p
+    Click on the applications to see extended information.
+
+  %p
+    You can delete your applications any time from the extended information view.
+  %p
+    Please contact event organizer if you need more information about your application.
+
+#event_applications_help.help
+  %p
+    Here are listed all the applications for this event.
+  %p
+    Click on the application to read it, rate it and, eventually, change its state.
+  %p
+    The rating column represents the average rating from all the leaders that submitted a rating for this application.
+
+#event_application_info_help.help
+  %p
+    You can read here all the information related to this application.
+  %p
+    You can rate the application by clicking on the stars. The rate is private, and it is only used to calculate the average rating, that the other leaders of the event can see. You can change your rating anytime.
+  %p
+    You can also change the state of the application. Note that when you change the state the applicant is immediately informed by email. Possible states are "Accepted", "Rejected", "Waiting list", "Pending" and "Other". For events with several leaders, do it only when the team has agreed.
+
+#changelog.help
+  %h3 Changelog
+  %pre
+    - begin
+      = File.read(CHANGELOG)
+    - rescue
+      Changelog not available

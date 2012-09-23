@@ -1,0 +1,58 @@
+%form#user_create.view
+  %fieldset
+    %legend New user details
+    %table.table_info
+      %tr
+        %td
+        %td{ :style => "color:#A2A2A2" }
+          %i Mandatory fields
+      %tr
+        %td
+          %label.mandatory Username
+        %td
+          %input{:type => "text",
+                 :name => "username",
+                 :required => "required"}
+      %tr
+        %td
+          %label.mandatory Password
+        %td
+          %input{:type => "text",
+                 :name => "password",
+                 :required => "required"}
+      %tr
+        %td
+          %label.mandatory Email
+        %td
+          %input{:type => "text",
+                 :name => "email",
+                 :required => "required"}
+      %tr
+        %td
+        %td
+          %button{ :type => "submit" } Submit
+          %button{ :type => "reset" } Reset
+
+#user_info.view
+  %form#user_update
+    %fieldset
+      %legend Update user details
+      %table.table_info
+        %tr
+          %td
+            %label Rank
+          %td
+            %select{ :name => "rank" }
+              %option{ :value => "0" } Superadmin
+              %option{ :value => "1" } Admin
+              %option{ :value => "2" } User
+            %input{ :type => "hidden", :name => "id" }
+        %tr
+          %td
+          %td
+            %button{ :type => "submit" } Submit
+            %button{ :type => "reset" } Reset
+
+  %table#user_info_table.table_info
+
+= haml :_help

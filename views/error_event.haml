@@ -1,0 +1,16 @@
+.view.narrow{ :style => "display:block" }
+  %div
+    %h3 Event information
+    .top_actions
+      - if @event
+        %button{ :onclick => "window.location=\"../../#event_info+#{@event[:id]}\"" }
+          Login in YeapsY
+      - else
+        %button{ :onclick => "window.location=\"../../\"" }
+          Login in YeapsY
+
+  %table#event.table_info
+    %tr
+      %td.label_column Error
+      %td
+        = @error

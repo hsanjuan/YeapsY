@@ -1,0 +1,13 @@
+#application_info.view.narrow
+  %div
+    %h3
+      %i.icon-file
+      = " Application information"
+    .top_actions
+      %button#remove_application
+        %i.icon-trash
+        = " Remove application"
+      %button.show{ :value => "#applications" }
+        %i.icon-arrow-left
+        = " Back to applications"
+  %table#application.table_info

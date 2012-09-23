@@ -1,0 +1,19 @@
+%p#countdown_p{ :style => "float:left; position:absolute" }
+  Session will automaticly log out in 
+  %span#countdown
+  %a.refresh{ :style => "text-decoration:none", :href => "#users" }
+    %i.icon-refresh
+
+%p
+  = "YeapsY Event Manager (beta). Version #{YEAPSY_VERSION}."
+  %img{ :src => "images/html5.png", :alt => "html5", :style => "float:right", :height => "30" }
+
+%p
+  %a.help{ :href => "#ToS" } Terms of Service
+  &nbsp;&nbsp;
+  %a.help{ :href => "#privacy_policy" } Privacy Policy
+  &nbsp;&nbsp;
+  %a{ :href => "http://yeapsy.com" } Yeapsy.com
+  &nbsp;&nbsp;
+  %i.icon-twitter &nbsp;
+  %a{ :href => "https://twitter.com/YeapsY" } @YeapsY

@@ -1,0 +1,35 @@
+Version 0.1.9 (beta):
+        * Finished transition to HAML templates
+        * Improved error pages.
+        * Do not crash if ToS, privacy policy templates are not available
+        * Small changes to prepare publishing of sources
+Version 0.1.8 (beta):
+        * Enabled browser history navigation, direct links
+        * Improved logging
+        * Better code organization
+        * Login with email also possible
+        * Fix bug that logged out admins when deleting different user
+        * Fixed public event information page
+        * Started transition from ERB to HAML templates
+Version 0.1.7 (beta):
+        * Generate include js scripts depending on environment
+        * Integrate register form in the login form
+        * Commenting, licensing and code clean up
+        * Fix error reporting to user when database restriction is not met
+        * Human check numbers are now lower and thus, easier
+        * Fix error with IE8, preventing regulars users to open event information
+        * Updated jQuery* libraries
+        * Applicants will be informed by email when their application has been received
+        * Added Twitter feed to dashboard
+Version 0.1.6 (beta):
+        * Improved email check
+        * Improve error reporting when registering new user
+        * Increased session logout time to 40 min
+
+Version 0.1.5 (beta):
+        * Added changelog
+        * Added icons on buttons. Minor style corrections
+        * Profile and feedback form now accessed from top right buttons
+        * Added logout timeout so that session expiration is not a surprise
+        * Better integration of messages popups
+        * New dashboard

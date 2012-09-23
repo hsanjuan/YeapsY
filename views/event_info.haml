@@ -1,0 +1,70 @@
+#event_info.view.narrow{ :style => "display:block" }
+  %div
+    %h3 Event information
+    .top_actions
+      %button{:onclick=>"window.location=\"../../#event_info+#{@event[:id]}\"" }
+        Apply to this event: please login/register in YeapsY
+
+  %table#event.table_info
+    %tr
+      %td.label_column Title / ID
+      %td #{@event[:name]} / #{@event[:id]}
+    %tr
+      %td.label_column State
+      %td #{@event[:state]}
+    %tr
+      %td.label_column Organizer
+      %td #{@event[:organizer]}
+    %tr
+      %td.label_column Web
+      %td
+        %a{ :href => @event[:organizer_web] }
+          = @event[:organizer_web]
+    %tr
+      %td.label_column Contact phone
+      %td #{@event[:organizer_telephone]}
+    %tr
+      %td.label_column Contact email
+      %td
+        %a{ :href => "mailto:#{@event[:organizer_email]}" }
+          = @event[:organizer_email]
+    %tr
+      %td.label_column Description
+      %td
+        %pre #{@event[:description]}
+    %tr
+      %td
+      %td
+    %tr
+      %td.label_column Venue
+      %td #{@event[:venue]}
+    %tr
+      %td.label_column Town
+      %td #{@event[:town]}
+    %tr
+      %td.label_column Country
+      %td #{@event[:country]}
+    %tr
+      %td
+      %td
+    %tr
+      %td.label_column Start date
+      %td
+        = @event[:date_start] ? @event[:date_start].strftime("%d-%m-%Y") : ""
+    %tr
+      %td.label_column End date
+      %td
+        = @event[:date_end] ? @event[:date_end].strftime("%d-%m-%Y") : ""
+    %tr
+      %td.label_column Deadline for applications
+      %td
+        = @event[:app_deadline] ? @event[:app_deadline].strftime("%d-%m-%Y") :""
+    %tr
+      %td
+      %td
+    %tr
+      %td.label_column Number of participants
+      %td #{@event[:n_participants]}
+    %tr
+      %td.label_column Number of leaders
+      %td #{@event[:n_leaders]}

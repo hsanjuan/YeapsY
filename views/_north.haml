@@ -1,0 +1,24 @@
+%table#menutop_container
+  %tr
+    %td{ :style => "width:210px" }
+      %img#logo{ :src => "images/yeapsy_logo_horizontal.png", :alt => "YeapsY logo small", :height => "45", :width => "177" }
+    %td#menutop_navbar.menu
+      %ul
+        %li#li_dashboard.selected
+          %i.icon-home
+        %li#li_users.superadmin
+          %i.icon-group
+          &nbsp;Users
+        %li#li_events
+          %i.icon-picture
+          &nbsp;Events
+        %li#li_applications
+          %i.icon-list
+          &nbsp;MyApplications
+    %td#top_links{ :style => "width:350px" }
+      %a#logout{ :href => "#"}
+        %i.icon-signout.icon-large
+      %a.show{ :href => "#feedback" }
+        Feedback&nbsp;
+        %i.icon-envelope-alt
+      %a#top_link_user.show{ :href => "#my_profile" }

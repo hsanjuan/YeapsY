@@ -1,0 +1,30 @@
+#event_info.view.narrow
+  %div
+    %h3
+      %i.icon-picture
+      = " Event information"
+    .top_actions
+      %button#apply
+        %i.icon-magic
+        = " Apply to this event"
+      %button#list_event_applications.event_leader
+        %i.icon-search
+        = " See applications"
+      %button#edit_event_b.event_admin
+        %i.icon-pencil
+        = " Edit event"
+      %button#remove_event.event_admin
+        %i.icon-trash
+        = " Remove event"
+      %button.show{ :value => "#events" }
+        %i.icon-arrow-left
+        = " Back to events"
+  %table#event.table_info
+  .bottom_actions
+    %button.show{ :value => "#events" }
+      %i.icon-arrow-left
+      = " Back to events"
+
+  %form#application_create
+    %h3#app_anchor Submit application
+    %table.table_info

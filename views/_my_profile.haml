@@ -1,0 +1,18 @@
+#my_profile.view.narrow
+  %div
+    %h3
+      %i.icon-user
+      = " My profile"
+    .top_actions
+      %button#edit_profile
+        %i.icon-pencil
+        = " Edit profile / Change password"
+      %button#remove_profile
+        %i.icon-trash
+        = " Remove profile"
+      %button.show{ :value => "#dashboard" }
+        %i.icon-arrow-left
+        = " Back to dashboard"
+      %button.help{ :value => "#profile_help" }
+        %i.icon-question-sign
+  %table#profile.table_info

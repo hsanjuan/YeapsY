@@ -1,0 +1,62 @@
+###############################################################################
+#     Copyright © 2012 Hector Sanjuan                                         #
+#                                                                             #
+#     This file is part of Yeapsy.                                            #
+#                                                                             #
+#     Yeapsy is free software: you can redistribute it and/or modify          #
+#     it under the terms of the GNU General Public License as published by    #
+#     the Free Software Foundation, either version 3 of the License, or       #
+#     (at your option) any later version.                                     #
+#                                                                             #
+#     Yeapsy is distributed in the hope that it will be useful,               #
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           #
+#     GNU General Public License for more details.                            #
+#                                                                             #
+#     You should have received a copy of the GNU General Public License       #
+#     along with Yeapsy.  If not, see <http://www.gnu.org/licenses/>.         #
+#                                                                             #
+###############################################################################
+
+# Address where the site will be deployed
+:site:                   http://example.com
+
+# Defauly yeapsy contact address
+# Errors/feedback etc. will be sent here
+:contact:                contact@example.com
+
+# Default credentials for the first administrator
+:username:               admin
+:password:               admin
+:email:                  admin@example.com
+
+# Environment - development, production
+:environment:            development
+
+# Cookie secret
+:secret:                 "aslajghetlkajsehtla;uiwehflkjabhef"
+
+# Email configuration
+:mail_via:               sendmail #smtp or sendmail
+
+# SMTP configuration
+:smtp_address:
+:smtp_user_name:
+:smtp_port:
+:smtp_password:
+:smtp_authentication:    login #login, plain...
+:smtp_enable_starttls_auto: true
+
+
+# Yeapsy database
+# Types:
+#   url: Yeapsy will connect to ENV['DATABASE_URL']. Useful for Heroku.
+#   mysql: connect to mysql DB with the details specified below
+#   sqlite: store database in sqlite_file
+
+:database_type:          url #mysql, sqlite
+:database_sqlite_file:   'db/yeapsy.db'
+:database_host:          localhost
+:database_user:
+:database_name:
+:database_pw:

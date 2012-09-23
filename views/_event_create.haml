@@ -1,0 +1,162 @@
+#event_create.view.narrow
+  %div
+    %h3 Create event
+    .top_actions
+      %button.show{ :value => "#events" }
+        %i.icon-arrow-left
+        = "Back to events"
+      %button.help{ :value => "#event_create_edit_help" }
+        %i.icon-question-sign
+  %table{ :style => "width:100%" }
+    %tr
+      %td
+        %form
+
+          %fieldset
+            %legend New event details
+            %table.table_info
+              %tr
+                %td.label
+                %td{ :style => "color:#A2A2A2" }
+                  %i *Mandatory fields
+              %tr
+                %td.label
+                  %label.mandatory Event title
+                %td
+                  %input{:type => "text",
+                         :name => "name", :required => "required" }
+              %tr
+                %td.label
+                  %label.mandatory Organizer
+                %td
+                  %input{:type => "text",
+                         :name => "organizer", :required => "required" }
+              %tr
+                %td.label
+                  %label Web
+                %td
+                  %input{:type => "text",
+                         :name => "organizer_web" }
+              %tr
+                %td.label
+                  %label Contact phone
+                %td
+                  %input{:type => "text",
+                         :name => "organizer_telephone" }
+              %tr
+                %td.label
+                  %label.mandatory Contact email
+                %td
+                  %input{:type => "text",
+                         :name => "organizer_email", :required => "required" }
+              %tr
+                %td.label
+                  %label Leaders
+                %td
+                  %input{:type => "text",
+                         :name => "leaders" }
+                  .tip YeapsY usernames of leaders for this event, separated by commas
+              %tr
+                %td.label
+                  %label.mandatory Description
+                %td
+                  %textarea{ :name => "description", :required => "required" }
+
+          %fieldset
+            %legend Venue details
+            %table.table_info
+              %tr
+                %td.label
+                %td{ :style => "color:#A2A2A2" }
+                  %i *Mandatory fields
+              %tr
+                %td.label
+                  %label.mandatory Venue
+                %td
+                  %input{:type => "text",
+                         :name => "venue", :required => "required" }
+              %tr
+                %td.label
+                  %label.mandatory Town
+                %td
+                  %input{:type => "text",
+                         :name => "town", :required => "required" }
+              %tr
+                %td.label
+                  %label.mandatory Country
+                %td
+                  %select#create_event_countries{:name => "country",
+                                                 :required => "required" }
+                    %option
+
+          %fieldset
+            %legend Dates
+            %table.table_info
+              %tr
+                %td.label
+                %td{ :style => "color:#A2A2A2" }
+                  %i *Mandatory fields
+              %tr
+                %td.label
+                  %label.mandatory Start date
+                %td
+                  %input.date{:type => "text",
+                              :name => "date_start", :required => "required" }
+                  .tip dd-mm-yyyy
+              %tr
+                %td.label
+                  %label.mandatory End date
+                %td
+                  %input.date{:type => "text",
+                              :name => "date_end", :required => "required" }
+                  .tip dd-mm-yyyy
+              %tr
+                %td.label
+                  %label Deadline for applications
+                %td
+                  %input.date{:type => "text",
+                              :name => "app_deadline", :required => "required" }
+                  .tip dd-mm-yyyy
+
+
+          %fieldset
+            %legend Participants
+            %table.table_info
+              %tr
+                %td.label
+                %td{ :style => "color:#A2A2A2" }
+                  %i *Mandatory fields
+              %tr
+                %td.label
+                  %label Number of participants
+                %td
+                  %input{:type => "text",
+                         :name => "n_participants" }
+              %tr
+                %td.label
+                  %label Number of leaders
+                %td
+                  %input{:type => "text",
+                         :name => "n_leaders", :required => "required" }
+              %tr
+                %td.label
+                  %label Application template
+                %td
+                  %textarea{ :name => "app_description" }
+                  .tip Place any other requested information from applicants here. Applicants will be presented this text in their application form and asked to fill it in
+              %tr
+                %td.label
+                %td
+                  %button{ :type => "submit" }
+                    %i.icon-ok
+                    = " Submit"
+                  %button{ :type => "reset" }
+                    %i.icon-undo
+                    = " Reset"
+
+          %fieldset
+            %legend Attention
+            %table
+              %tr
+                %td{ :style => "color:#A2A2A2" }
+                  Events are created with status "disabled". To publish an event please edit the event and select a different status.
