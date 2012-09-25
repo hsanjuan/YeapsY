@@ -105,6 +105,7 @@ class YeapsyServer < Sinatra::Base
     before do
         # Cache directive
         cache_control :public, :must_revalidate, :max_age => 600 #10 mins
+        content_type 'application/json'
 
         # If request is not for a public path
         # Check if we are authenticated, otherwise halt
@@ -144,10 +145,12 @@ class YeapsyServer < Sinatra::Base
     ###########################################################################
 
     get '/' do
+        content_type 'text/html'
         haml :index
     end
 
     get '/changelog' do
+        content_type 'text/plain'
         begin
             File.read(CHANGELOG)
         rescue
@@ -225,6 +228,7 @@ class YeapsyServer < Sinatra::Base
 
     get '/y/event/:id' do
         cache_control :no_cache
+        content_type 'text/html'
         begin
             id = params[:id]
             @event = Event[id]
@@ -258,6 +262,7 @@ class YeapsyServer < Sinatra::Base
     end
 
     get '/tos' do
+        content_type 'text/html'
         begin
             haml :_ToS, :layout => :layout_simple
         rescue
@@ -266,6 +271,7 @@ class YeapsyServer < Sinatra::Base
     end
 
     get '/privacy' do
+        content_type 'text/html'
         begin
             haml :privacy_policy, :layout => :layout_simple
         rescue
@@ -317,6 +323,7 @@ class YeapsyServer < Sinatra::Base
     end
 
     not_found do
+        content_type 'text/html'
         haml :error404, :layout => :layout_simple
     end
 end
