@@ -78,7 +78,7 @@ class YeapsyDB
             String :about_private, :text => true
             Time :reg_date
             Time :last_login
-            Boolean :enabled, :default => false
+            TrueClass :enabled, :default => false
         end
 
         @db.create_table? :events do
@@ -113,6 +113,7 @@ class YeapsyDB
             String :application_data, :text => true
             Integer :state
             Time :app_time
+            TrueClass :archived, :default => false
         end
 
 

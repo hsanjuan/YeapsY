@@ -56,7 +56,7 @@ var EventApplication = {
             if (!json['average']) json['average']="";
 
             // Update the table
-            Yeapsy.dt.update($dt_event_applications,json);
+            Yeapsy.dt.update($dt_event_applications, json);
             Yeapsy.helper.popMessage('Success',
                                      'Application updated');
         },
@@ -65,6 +65,24 @@ var EventApplication = {
             // and rating the application
             $('table#event_application',$event_application_info).html(
                 EventApplication.event_application_table_trs(json));
+
+            // Add archive checkbox if user is superadmin or event admin
+            var event_id = json['event_id'] ? json['event_id'] : -1;
+            var event_info = Yeapsy.dt.getData($dt_events,
+                                             event_id)
+            var admin_id = event_info ? event_info.admin_id : -1;
+
+            if (rank == 0 || (rank == 1 && admin_id == user_id)){
+                $('form#event_application_archive',
+                  $event_application_info).show();
+                $('form#event_application_archive table',
+                  $event_application_info).html(
+                    EventApplication.event_application_archive_trs(json));
+            } else {
+                $('form#event_application_archive',
+                  $event_application_info).hide();
+            }
+
             $('form#event_application_edit table',$event_application_info).html(
                 EventApplication.event_application_edit_trs(json));
             $('form#event_application_rate table',$event_application_info).html(
@@ -178,6 +196,23 @@ var EventApplication = {
        <div class="tip">CAUTION! Changing this value will trigger the sending of an information email to the applicant. Make sure all the leaders have agreed before changing this value.</div>\
    </td>\
   </tr>';
+
+        return html;
+    },
+
+    event_application_archive_trs : function(json){
+        var checked = json['archived'] ? 'checked="checked"' : '';
+        var html = '\
+  <tr>\
+    <td class="label"><label>Archived</label></td>\
+    <td>\
+       <input type="checkbox" name="archived" value="true" '+checked+' />\
+       <input type="hidden" name="application_id" value="'+json['id']+'" />\
+       <input type="hidden" name="event_id" value="'+json['event_id']+'" />\
+       <div class="tip">Archived application are only visible to event administrators, not leaders.</div>\
+   </td>\
+  </tr>';
+
         return html;
     },
 
@@ -224,6 +259,18 @@ var EventApplication = {
                 }
             }
         });
+        return false;
+    },
+
+    onSubmitArchive : function(){
+        // Edit archive state
+        var data = Yeapsy.helper.serializeForm(this);
+        if (!data['archived']) data['archived'] = false;
+        else data['archived'] = true;
+        EventApplication.actions.put(data['event_id'],
+                                     data['application_id'],
+                                     data,
+                                     EventApplication.callbacks.put);
         return false;
     },
 
@@ -333,17 +380,27 @@ var EventApplication = {
 $(document).ready(function(){
 
     // When changing the state of an application trigger a submit
-    $('select#event_application_state',
-      $event_application_info).live("change",function(){
-          $(this).parents('form#event_application_edit').trigger('submit');
-      });
+    $('select#event_application_state', $event_application_info).live(
+        "change", function(){
+            $(this).parents('form#event_application_edit').trigger('submit');
+        }
+    );
+
+    $('input[name="archived"]', $event_application_info).live(
+        "click", function(){
+            $(this).parents('form#event_application_archive').trigger('submit');
+        }
+    );
 
     $('form#event_application_edit',
       $event_application_info).submit(EventApplication.onSubmitEdit);
 
+    $('form#event_application_archive',
+      $event_application_info).submit(EventApplication.onSubmitArchive);
+
     // Trigger a new rating when clicking on a star
     $('form#event_application_rate a',
-      $event_application_info).live('click',EventApplication.onSubmitRate);
+      $event_application_info).live('click', EventApplication.onSubmitRate);
 
     $dt_event_applications = $('table#dt_event_applications',
                               $event_applications).dataTable({
@@ -491,11 +548,16 @@ $(document).ready(function(){
                 'mDataProp': 'evaluation_id',
                 'bSearchable' : true,
                 'bVisible' : false
+            },
+            {
+                'mDataProp': 'archived',
+                'bSearchable' : false,
+                'bVisible' : false
             }
         ],
         'aoColumnDefs' : [
             {
-                "aTargets": [ -1 ]
+                "aTargets": [ -2 ]
             }
         ]
     });
@@ -504,7 +566,7 @@ $(document).ready(function(){
         var json = $dt_event_applications.fnGetData(this);
         if (!json) return false;
         EventApplication.callbacks.getEventApplication(json);
-        showView('#event_application_info', true, 
+        showView('#event_application_info', true,
                  json['event_id'] + '+' + json['id']);
         return false;
     });

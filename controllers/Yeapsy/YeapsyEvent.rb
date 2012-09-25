@@ -221,6 +221,7 @@ module YeapsyEvent
         app_info[:state] = app.state
         app_info[:app_time] = app.app_time
         app_info[:event_id] = app.event_id
+        app_info[:archived] = app.archived
 
         #add information from the evaluation
         eval = app.evaluations_dataset.first(:author_id => @user_id)
@@ -248,7 +249,16 @@ module YeapsyEvent
                     !leaders.include?(@username)
                 return YeapsyError.forbidden('list event applications').to_json
             end
-            apps = event.applications.collect do |app|
+
+            # If not superadmin or admin, do not include archived apps
+            if @user_rank != :superadmin && admin_id != @user_id
+                apps = event.applications_dataset.filter(:archived => false)
+            else
+                apps = event.applications
+            end
+
+
+            apps = apps.collect do |app|
                 prepare_app_info(app)
             end
 
@@ -279,10 +289,15 @@ module YeapsyEvent
                 return YeapsyError.forbidden('get event application').to_json
             end
 
+            #archived applications cannot be seen by leaders
+            if @user_rank != :superadmin && admin_id != @user_id &&
+               app.archived
+                return YeapsyError.forbidden('see this application').to_json
+            end
+
             app_info = prepare_app_info(app)
 
-            return [200,app_info.to_json]
-
+            return [200, app_info.to_json]
         rescue => e
             #warn e.backtrace
             return YeapsyError.new("Error getting application for event",
@@ -315,11 +330,25 @@ module YeapsyEvent
                 return YeapsyError.forbidden('modify application for event').to_json
             end
 
-            if event.admin_id != @user_id && !leaders.include?(@username)
-                return YeapsyError.forbidden('modify application for event.').to_json
+            if @user_rank != :superadmin &&
+               event.admin_id != @user_id &&
+               !leaders.include?(@username)
+                return YeapsyError.forbidden('modify application for event').to_json
             end
 
-            fields = [:state]
+            fields = []
+            fields << :state if info_hash[:state]
+
+            state_old = YeapsyApplication::APP_ST_INV[app.state]
+
+            # event administrators can edit this
+            if !info_hash[:archived].nil?
+                if event.admin_id == @user_id || @user_rank == :superadmin
+                    fields << :archived
+                else
+                    return YeapsyError.forbidden('archive application').to_json
+                end
+            end
 
             # Commit to DB
             app.update_fields(info_hash, fields, {:missing => :skip})
@@ -329,12 +358,14 @@ module YeapsyEvent
 
             # Inform user the state of the application has changed
             state_str = YeapsyApplication::APP_ST_INV[app.state]
-            @mail.send(nil,user.email,
-                       "Yeapsy: the state of your application has changed",
-                       YeapsyMail.application_state_change(event.name,
-                                                           state_str))
+            if state_old != state_str
+                @mail.send(nil,user.email,
+                           "Yeapsy: the state of your application has changed",
+                           YeapsyMail.application_state_change(event.name,
+                                                               state_str))
+            end
 
-            return [200,app_info.to_json]
+            return [200, app_info.to_json]
         rescue Sequel::Error => e
             return YeapsyError.new("Error updating application",
                                    e.message,
