@@ -170,6 +170,7 @@ var EventApplication = {
     event_application_edit_trs : function(json){
         // Generate event edition table rows. Allows changing the event state
         json = Yeapsy.helper.sanitizeJSON(json);
+        json['state'] = json['state'].replace(' (archived)', '');
         var html = '\
   <tr>\
     <td class="label"><label>State</label></td>\
@@ -520,10 +521,13 @@ $(document).ready(function(){
             {
                 'mDataProp': 'state',
                 'bSearchable' : true,
-                'sWidth' : '100px',
+                'sWidth' : '200px',
                 'bVisible' : true,
                 'fnRender' : function(o,val){
-                    return Application.state_str(val);
+                    var st = Application.state_str(val);
+                    if (o.aData.archived)
+                        st += ' (archived)';
+                    return st;
                 }
             },
             {
