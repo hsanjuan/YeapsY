@@ -543,7 +543,7 @@ $(document).ready(function(){
             {
                 'mDataProp': 'organizer',
                 'bSearchable' : true,
-                'bVisible' : true
+                'bVisible' : false
             },
             {
                 'mDataProp': 'organizer_web',
@@ -573,6 +573,7 @@ $(document).ready(function(){
                 {
                 'mDataProp': 'country',
                 'bSearchable' : true,
+                'sWidth' : '250px',
                 'bVisible' : true
             },
             {
@@ -596,7 +597,7 @@ $(document).ready(function(){
             {
                 'mDataProp': 'app_deadline',
                 'bSearchable' : true,
-                'bVisible' : false,
+                'bVisible' : true,
                 'fnRender' : function(o,val){
                     return Yeapsy.helper.date(val);
                 },
