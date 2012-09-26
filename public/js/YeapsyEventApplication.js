@@ -167,30 +167,36 @@ var EventApplication = {
         return html;
     },
 
+    selected_state : function(json_state, state){
+               // Determines if the states that comes with the JSON
+        // is the selected statean option will be the selected state option
+        // regardless if json_state comes in number or in string
+        // and returns the selected attribute for the <option>
+        if (json_state == state) return 'selected="selected"';
+        if (json_state == 'Pending review' && state == 0 ||
+            json_state == 'Accepted' && state == 1 ||
+            json_state == 'Rejected' && state == 2 ||
+            json_state == 'Waiting list' && state == 3 ||
+            json_state == 'Other' && state == 4)
+            return 'selected="selected"';
+        return ''
+    },
+
     event_application_edit_trs : function(json){
         // Generate event edition table rows. Allows changing the event state
         json = Yeapsy.helper.sanitizeJSON(json);
-        json['state'] = json['state'].replace(' (archived)', '');
+        if (json['state'] && json['state'].length > 0)
+            json['state'] = json['state'].replace(' (archived)', '');
         var html = '\
   <tr>\
     <td class="label"><label>State</label></td>\
     <td>\
        <select id="event_application_state" type="text" name="state">\
-          <option value="0" '+
-            (json['state'] == 'Pending review' ? 'selected="selected"' : '')+
-            '>Pending review</option>\
-          <option value="1" '+
-            (json['state'] == 'Accepted' ? 'selected="selected"' : '')+
-            '>Accepted</option>\
-          <option value="2" '+
-            (json['state'] == 'Rejected' ? 'selected="selected"' : '')+
-            '>Rejected</option>\
-          <option value="3" '+
-            (json['state'] == 'Waiting list' ? 'selected="selected"' : '')+
-            '>Waiting list</option>\
-          <option value="4" '+
-            (json['state'] == 'Other' ? 'selected="selected"' : '')+
-            '>Other</option>\
+          <option value="0" '+ EventApplication.selected_state(json['state'], 0) +'>Pending review</option>\
+          <option value="1" '+ EventApplication.selected_state(json['state'], 1) + '>Accepted</option>\
+          <option value="2" '+ EventApplication.selected_state(json['state'], 2) + '>Rejected</option>\
+          <option value="3" '+ EventApplication.selected_state(json['state'], 3) + '>Waiting list</option>\
+          <option value="4" '+ EventApplication.selected_state(json['state'], 4) + '>Other</option>\
        </select>\
        <input type="hidden" name="application_id" value="'+json['id']+'" />\
        <input type="hidden" name="event_id" value="'+json['event_id']+'" />\

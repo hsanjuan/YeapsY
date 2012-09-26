@@ -252,7 +252,7 @@ module YeapsyEvent
 
             # If not superadmin or admin, do not include archived apps
             if @user_rank != :superadmin && admin_id != @user_id
-                apps = event.applications_dataset.filter(:archived => false)
+                apps = event.applications_dataset.exclude(:archived => true)
             else
                 apps = event.applications
             end
