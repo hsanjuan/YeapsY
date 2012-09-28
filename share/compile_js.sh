@@ -36,7 +36,7 @@ compiler_args=""
 for FILE in $JS_FILES; do
     compiler_args+=" --js=$FILE"
 done
-echo $compiler_args
+
 java -jar $CLOSURE_COMPILER $compiler_args --js_output_file=$OUTPUT_FILE
 
 if [ $? -ne 0 ]; then
