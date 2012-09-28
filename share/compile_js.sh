@@ -1,6 +1,20 @@
 OUTPUT_FILE="Yeapsy.min.js"
 JS_FOLDER="../public/js"
 CLOSURE_COMPILER="/usr/local/bin/closure-compiler.jar"
+# order matters
+JS_FILES="\
+YeapsyVars.js \
+YeapsyLayout.js \
+YeapsyAuth.js \
+Yeapsy.js \
+YeapsyDashboard.js \
+YeapsyUser.js \
+YeapsyEvent.js \
+YeapsyApplication.js \
+YeapsyEventApplication.js \
+YeapsyEvaluation.js \
+YeapsyFeedback.js"
+
 
 if [ -n "$1" ]; then
     CLOSURE_COMPILER=$1
@@ -19,10 +33,10 @@ if [ -f $OUTPUT_FILE ]; then
 fi
 
 compiler_args=""
-for FILE in $(ls *.js); do
+for FILE in $JS_FILES; do
     compiler_args+=" --js=$FILE"
 done
-
+echo $compiler_args
 java -jar $CLOSURE_COMPILER $compiler_args --js_output_file=$OUTPUT_FILE
 
 if [ $? -ne 0 ]; then
