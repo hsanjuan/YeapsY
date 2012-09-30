@@ -275,9 +275,10 @@ var Event = {
         // Generate rows for the event application form
         var html = '\
   <tr>\
-    <input type="hidden" name="event_id" value="'+json['id']+'" /></td>\
     <td><label>Application text</label></td>\
-    <td><textarea name="application_data" style="height:30em;">'+json['app_description']+'</textarea>\
+    <td>\
+        <input type="hidden" name="event_id" value="'+json['id']+'" />\
+        <textarea name="application_data" style="height:30em;">'+json['app_description']+'</textarea>\
         <div class="tip">Please provide the information requested directly under the each of the questions. You can only submit one application for each event.</div>\
     </td>\
   </tr>\
