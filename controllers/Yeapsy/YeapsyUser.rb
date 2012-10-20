@@ -159,6 +159,13 @@ module YeapsyUser
             user = User[id]
             return YeapsyError.nonexistent('user').to_json if !user
             user.destroy #deletes associated models
+
+            if @config[:activity_watch]
+                @mail.send(nil, nil,
+                          "Yeapsy: deleted user",
+                          "User #{user.username} has been deleted")
+            end
+
             return [200, user.to_json(:except => :password)]
         rescue => e
             return YeapsyError.new("Error deleting user",

@@ -25,12 +25,20 @@
 # Errors/feedback etc. will be sent here
 :contact:                contact@example.com
 
+# Inform contact address when something happens in YeapsY
+# i.e. New user has registered/deleted
+:activity_watch:         true
+
+# YeapsY will send emails FROM this address
+:email_from:             yeapsy@example.com
+
 # Default credentials for the first administrator
 :username:               admin
 :password:               admin
 :email:                  admin@example.com
 
 # Environment - development, production
+# When production Yeapsy.min.js is needed
 :environment:            development
 
 # Cookie secret

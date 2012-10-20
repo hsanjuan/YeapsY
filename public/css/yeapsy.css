@@ -410,6 +410,17 @@ input, textarea {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
+input[type=checkbox] {
+    /* Fix Opera funny checkboxes */
+    width: auto!important;
+    height: auto!important;
+    max-width: none!important;
+    min-width: 0!important;
+    border: auto!important;
+    background: #ffffff!important;
+    border-color: #999999!important;
+}
+
 form textarea {
     width: 60%;
     min-width: 150px;

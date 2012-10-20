@@ -61,7 +61,7 @@ class YeapsyServer < Sinatra::Base
         set :db, database # keep database accessible
         set :yeapsy_config, config
         set :mail, YeapsyMail.new(config) # Init mail. Used to send emails.
-
+        set :haml, :format => :html5
 
         # Only when the database has been initialized we can load the models
         # Alternative option is using Schema plugin so that schema can be
@@ -119,6 +119,15 @@ class YeapsyServer < Sinatra::Base
             halt 401
         else #this code runs normally all the time on authenticated requests
             cache_control :no_cache
+
+            # Extract some configuration values that are interesting
+            # to keep in @Yeapsy object
+            interesting_cfg = [:activity_watch]
+            interesting_cfg = interesting_cfg.collect do |key|
+                [key, settings.yeapsy_config[key]]
+            end
+            interesting_cfg = Hash[interesting_cfg]
+
             @user_name = env['warden'].user[:username]
             @user_id = env['warden'].user[:id]
             @rank = env['warden'].user[:rank]
@@ -126,7 +135,8 @@ class YeapsyServer < Sinatra::Base
                                  @user_id,
                                  @user_name,
                                  @rank,
-                                 settings.mail)
+                                 settings.mail,
+                                 interesting_cfg)
         end
     end
 
@@ -219,7 +229,8 @@ class YeapsyServer < Sinatra::Base
     end
 
     post '/register' do
-        Yeapsy.register(request.body.read, settings.mail)
+        Yeapsy.register(request.body.read, settings.mail,
+                        settings.yeapsy_config[:activity_watch])
     end
 
     post '/reminder' do
@@ -313,8 +324,9 @@ class YeapsyServer < Sinatra::Base
     end
 
     delete '/user/:id' do
-        rc = @Yeapsy.delete('user',params[:id].to_i)
-        env['warden'].logout if params[:id].to_i == env['warden'].user[:id]
+        user_id = params[:id].to_i
+        rc = @Yeapsy.delete('user', user_id)
+        env['warden'].logout if user_id == env['warden'].user[:id]
         rc
     end
 

@@ -40,12 +40,13 @@ class Yeapsy
     include YeapsyEvaluation
 
     # Initialize an instance of Yeapsy, set some useful variables
-    def initialize(db, user_id, username, rank, mail)
+    def initialize(db, user_id, username, rank, mail, config = {})
         @db = db
         @mail = mail
         @user_id = user_id
         @user_rank = RANK_INV[rank.to_i]
         @username = username
+        @config = config
     end
 
     # Get the list of elements of this resource
@@ -128,7 +129,7 @@ class Yeapsy
     end
 
     # Register a new user in Yeapsy
-    def self.register(info, mail)
+   def self.register(info, mail, activity_watch = false)
         info_hash = Yeapsy.parse_json(info)
         if Yeapsy.is_error?(info_hash)
             return info_hash.to_json
@@ -163,10 +164,13 @@ class Yeapsy
             mail.send(nil, user.email,
                        "You have successfully registered in YeapsY",
                        YeapsyMail.registration(user.username))
-            # Comment if too annoying
-            mail.send(nil, nil,
-                      "Yeapsy: new user",
-                      YeapsyMail.new_user(user.username, user.email))
+
+            if activity_watch
+                mail.send(nil, nil,
+                          "Yeapsy: new user",
+                          YeapsyMail.new_user(user.username, user.email))
+            end
+
             return [200, user.to_json(:except => :password)]
         rescue Sequel::Error => e
             return YeapsyError.new("Error creating user",
