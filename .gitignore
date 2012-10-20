@@ -1,7 +1,6 @@
 db
 logs
 config/yeapsy-config.yaml
-Gemfile.lock
 views/old
 views/_ToS.haml
 views/_privacy_policy.haml
