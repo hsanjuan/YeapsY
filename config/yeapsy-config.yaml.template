@@ -38,6 +38,7 @@
 :email:                  admin@example.com
 
 # Environment - development, production
+# When production Yeapsy.min.js is needed
 :environment:            development
 
 # Cookie secret

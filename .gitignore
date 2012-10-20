@@ -5,3 +5,4 @@ Gemfile.lock
 views/old
 views/_ToS.haml
 views/_privacy_policy.haml
+public/js/Yeapsy.min.js
