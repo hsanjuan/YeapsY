@@ -6,6 +6,7 @@ class YeapsyMail
     # Set email configuration and contact for from field
     def initialize(config)
         @contact = config[:contact]
+        @email_from = config[:email_from]
         @via = config[:mail_via].to_sym
         @address = config[:smtp_address]
         @user_name = config[:smtp_user_name]
@@ -19,7 +20,7 @@ class YeapsyMail
     # Send an email]
     # Fork smtp send and leave it to a thread, since it takes long
     def send(from, to, subject, message)
-        if !from then from = @contact end
+        if !from then from = @email_from end
         if !to then to = @contact end
         case @via
         when :sendmail
