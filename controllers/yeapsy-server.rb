@@ -61,7 +61,7 @@ class YeapsyServer < Sinatra::Base
         set :db, database # keep database accessible
         set :yeapsy_config, config
         set :mail, YeapsyMail.new(config) # Init mail. Used to send emails.
-
+        set :haml, :format => :html5
 
         # Only when the database has been initialized we can load the models
         # Alternative option is using Schema plugin so that schema can be

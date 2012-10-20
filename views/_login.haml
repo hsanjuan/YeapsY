@@ -83,6 +83,7 @@
           %td.login_left
             %label
               Human check.
+              %br
               %span#number1
               &nbsp;&#43;&nbsp;
               %span#number2
@@ -93,15 +94,14 @@
             %input{ :type => "hidden", :name => "number1" }
             %input{ :type => "hidden", :name => "number2" }
         %tr
-          %td{ :colspan => "2" }
+          %td.login_left
             %label
-              = "I agree with the "
+              = "I agree with Yeapsy's"
               %a{ :href => "tos", :target => "_blank" } Terms of Service
-              = "and the "
               %a{ :href => "privacy", :target => "_blank" } Privacy Policy
-              = " of YeapsY"
+          %td
             %input{:type => "checkbox", :name => "agree", :value => "yes",
-                   :required => "required", :style => "float:right" }
+                   :required => "required" }
         %tr
           %td.login_left
           %td
