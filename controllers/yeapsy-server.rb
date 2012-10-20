@@ -52,7 +52,7 @@ class YeapsyServer < Sinatra::Base
             database = yeapsy_db.connect()
         rescue => e
             warn e.message
-            warn e.backtrace
+            warn e.backtrace.join("\n")
             exit 1
         end
 
