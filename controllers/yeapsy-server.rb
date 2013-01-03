@@ -336,7 +336,15 @@ class YeapsyServer < Sinatra::Base
     end
 
     not_found do
-        content_type 'text/html'
-        haml :error404, :layout => :layout_simple
+        # Return html view if first preference is html
+        # otherwise stick to json
+        if request.accept[0] == 'text/html'
+            content_type 'text/html'
+            return haml :error404, :layout => :layout_simple
+        else
+            return YeapsyError.new("Not found",
+                                   "The requested resource does not exist",
+                                   404).to_json
+        end
     end
 end
