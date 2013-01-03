@@ -429,14 +429,34 @@ var Yeapsy = {
                     showView('#event_info', true, false);
                     break;
                 case "event_application_info":
+                    var event_id = hash_arr[1]
+                    var app_id = hash_arr[2]
+                    if (!app_id)
+                        showView('#dashboard', true, false);
+
+                    // Get the specific application for this event and show it
                     EventApplication.actions.get(
-                        hash_arr[1],
-                        hash_arr[2],
+                        event_id,
+                        app_id,
                         function(json){
                             EventApplication.callbacks.getEventApplication(json)
                         }
                     );
                     showView('#event_application_info', true, false);
+
+                    // Fill in event because we can go back
+                    Event.actions.get(
+                        event_id,
+                        function(json){
+                            Event.callbacks.getEvent(json);
+                            Event.callbacks.getEventEdit(json);
+                        }
+                    );
+
+                    // Fill in applications pool for the event because
+                    // we can go back to it
+                    EventApplicationPool.actions.get(event_id,
+                                                     EventApplicationPool.callbacks.get)
                     break;
                 case "application_info":
                     Application.actions.get(

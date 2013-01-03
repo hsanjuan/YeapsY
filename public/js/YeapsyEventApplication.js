@@ -30,7 +30,6 @@ var EventApplicationPool = {
     callbacks: {
         get: function(pool_json){
             Yeapsy.dt.multiInsert($dt_event_applications, pool_json);
-            showView('#event_applications', true);
         }
     }
 };
