@@ -25,6 +25,7 @@ YEAPSY_VERSION = "0.1.9"
 BASE_DIR = File.join(File.dirname(__FILE__), '..')
 CHANGELOG = File.join(BASE_DIR, 'CHANGELOG')
 CONFIG_FILE = File.join(BASE_DIR, 'config', 'yeapsy-config.yaml')
+SESSION_TIMEOUT = 60 * 60 # 60 minutes in seconds
 
 require 'rubygems'
 require 'sinatra/base'
@@ -74,7 +75,7 @@ class YeapsyServer < Sinatra::Base
 
         # Use cookie-based sessions
         secret = yeapsy_config[:secret] || "yyyeapsyyy"
-        use Rack::Session::Cookie, :secret => secret,:expire_after => 2700
+        use Rack::Session::Cookie, :secret => secret, :expire_after => SESSION_TIMEOUT
     end
 
     # Helpers

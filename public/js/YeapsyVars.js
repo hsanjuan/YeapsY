@@ -40,7 +40,7 @@ var user_id;
 var rank;
 var email;
 var clockInterval;
-var LOGOUT_TIMEOUT = 40;
+var LOGOUT_TIMEOUT = 60;
 
 // Dashboard
 var $dashboard;

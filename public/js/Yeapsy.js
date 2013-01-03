@@ -329,9 +329,23 @@ var Yeapsy = {
                 }
 
                 if (secs == 0) {
-                    if (mins == 2)
-                        Yeapsy.helper.popMessage("Session will expire in 2 minutes",
-                                                 "Click on the refresh button at the left-bottom corner of the page to renew the session")
+                    // If we are close to timout show modal dialog and force user to refresh
+                    if (mins == 5){
+                        var dialog_html = '<div title="Renew session?">\
+<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;">\
+</span>Your session will be automaticly logged out in 5 minutes. Click renew to keep it active.</p></div>';
+                        $(dialog_html).dialog({
+                            resizable: false,
+                            height: 140,
+                            modal: true,
+                            buttons: {
+                                Renew: function(){
+                                    UserPool.actions.get();
+                                    $(this).dialog("close");
+                                }
+                            }
+                        })
+                    }
 
                     secs = 59;
                     mins --;
