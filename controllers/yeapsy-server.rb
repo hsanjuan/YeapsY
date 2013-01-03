@@ -20,7 +20,7 @@
 #                                                                             #
 ###############################################################################
 
-YEAPSY_VERSION = "0.1.9"
+YEAPSY_VERSION = "0.1.10"
 
 BASE_DIR = File.join(File.dirname(__FILE__), '..')
 CHANGELOG = File.join(BASE_DIR, 'CHANGELOG')
