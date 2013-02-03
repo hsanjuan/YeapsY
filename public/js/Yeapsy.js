@@ -157,7 +157,7 @@ var Yeapsy = {
             // Update a single item, provided it is present in dt
             dt.fnUpdate(item,
                         Yeapsy.dt.getRowPosition(dt,item['id']),
-                        null,false,false);
+                        undefined, false, false);
         },
         selectedRows : function(oTableLocal){
             // Returns the data from rows selected in a datatable
@@ -489,22 +489,22 @@ $(document).ready(function(){
     });
 
     // General listeners on what happens when clicking on a certain button
-    $('button.show').live('click', function(){
+    $(document).on('click', 'button.show', function(){
         showView($(this).val(), true);
         return false;
     });
 
-    $('a.show').live('click', function(){
+    $(document).on('click', 'a.show', function(){
         showView($(this).attr('href'), true);
         return false;
     });
 
-    $('button.help').live('click', function(){
+    $(document).on('click', 'button.help', function(){
         toggleEastView($(this).val());
         return false;
     });
 
-    $('a.help').live('click', function(){
+    $(document).on('click', 'a.help', function(){
         toggleEastView($(this).attr('href'));
         return false;
     });

@@ -386,14 +386,14 @@ var EventApplication = {
 $(document).ready(function(){
 
     // When changing the state of an application trigger a submit
-    $('select#event_application_state', $event_application_info).live(
-        "change", function(){
+    $($event_application_info).on(
+        "change", 'select#event_application_state', function(){
             $(this).parents('form#event_application_edit').trigger('submit');
         }
     );
 
-    $('input[name="archived"]', $event_application_info).live(
-        "click", function(){
+    $($event_application_info).on(
+        "click", 'input[name="archived"]', function(){
             $(this).parents('form#event_application_archive').trigger('submit');
         }
     );
@@ -405,8 +405,8 @@ $(document).ready(function(){
       $event_application_info).submit(EventApplication.onSubmitArchive);
 
     // Trigger a new rating when clicking on a star
-    $('form#event_application_rate a',
-      $event_application_info).live('click', EventApplication.onSubmitRate);
+    $($event_application_info).on('click', 'form#event_application_rate a',
+                                    EventApplication.onSubmitRate);
 
     $dt_event_applications = $('table#dt_event_applications',
                               $event_applications).dataTable({
@@ -571,7 +571,7 @@ $(document).ready(function(){
         ]
     });
 
-    $('tbody tr', $dt_event_applications).live("click",function(){
+    $('tbody', $dt_event_applications).on("click", "tr", function(){
         var json = $dt_event_applications.fnGetData(this);
         if (!json) return false;
         EventApplication.callbacks.getEventApplication(json);

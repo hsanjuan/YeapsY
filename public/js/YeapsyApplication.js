@@ -277,7 +277,7 @@ $(document).ready(function(){
     });
 
     // Listen to clicks on the application table rows and show the app
-    $('tbody tr', $dt_applications).live("click",function(){
+    $('tbody', $dt_applications).on("click", "tr", function(){
         var json = $dt_applications.fnGetData(this);
         if (!json) return false;
         Application.callbacks.getApplication(json);

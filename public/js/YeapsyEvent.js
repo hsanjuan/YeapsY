@@ -645,7 +645,7 @@ $(document).ready(function(){
         ]
     });
 
-    $('tbody tr', $dt_events).live("click",function(){
+    $('tbody', $dt_events).on("click", "tr", function(){
         var json = $dt_events.fnGetData(this);
         if (!json) return false;
         Event.callbacks.getEvent(json);

@@ -645,7 +645,7 @@ $(document).ready(function(){
     });
 
     // Open east pane when admin dbclicks on user
-    $('tbody tr', $dt_users).live("dblclick",function(){
+    $("tbody", $dt_users).on("dblclick", "tr", function(){
         var json = $dt_users.fnGetData(this);
         if (!json) return false;
         $('input[name="id"]',$user_info).val(json['id']);
@@ -655,7 +655,7 @@ $(document).ready(function(){
     });
 
     // Toggle column color
-    $('tbody tr', $dt_users).live("click", function() {
+    $('tbody', $dt_users).on("click", "tr", function(){
         $(this).toggleClass('row_selected');
     });
 });

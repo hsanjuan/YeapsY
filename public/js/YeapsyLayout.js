@@ -100,7 +100,7 @@ $(document).ready(function(){
 
 
     // Listen to menu items click, and open the view
-    $('.menu li',$north).live("click",function(){
+    $('.menu', $north).on("click", 'li', function(){
         var id = '#'+ $(this).attr("id").substring(3);
 
         $('li',$(this).parent()).removeClass("selected");
