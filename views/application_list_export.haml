@@ -1,0 +1,117 @@
+!!! 5
+%html
+  %head
+    %title YeapsY
+    %meta{ :charset => "UTF-8" }
+    %meta{ :content => "Event management platform", :name => "description" }
+    %link{ :rel => "icon", :href => "/favicon.ico" }
+    %link{ :rel => "stylesheet", :href => "/css/yeapsy.css" }
+
+  %body
+    #center{:style => 'background: none'}
+
+%h2{:style => 'text-align: center'}
+  = event_name
+%h3{:style => 'text-align: center'}
+  List of applications
+
+- apps.each do |app|
+  %br
+  %br
+  %h3
+    = "Application information (ID ##{app['id']})"
+  %table.table_info{:style => 'background:none!important'}
+    %tbody
+      %tr
+        %td.label_column
+          Application state
+        %td
+          = "#{YeapsyApplication::APP_ST_INV[app['state'].to_i].to_s}"
+      %tr
+        %td.label_column
+          Application mark (1-5)
+        %td
+          = "#{app['mark'].to_i / 20}"
+      %tr
+        %td.label_column
+          Username / ID
+        %td
+          = "#{app['username']} / #{app['id']}"
+      %tr
+        %td.label_column
+          Name
+        %td
+          = "#{app['name']}"
+      %tr
+        %td.label_column
+          Email
+        %td
+          = "#{app['email']}"
+      %tr
+        %td.label_column
+          Birth date
+        %td
+          = "#{app['birth_date']}"
+      %tr
+        %td.label_column
+          Birth place
+        %td
+          = "#{app['birth_place']}"
+      %tr
+        %td.label_column
+          Gender
+        %td
+          = "#{app['gender']}"
+      %tr
+        %td.label_column
+          Nationality
+        %td
+          = "#{app['nationality']}"
+      %tr
+        %td.label_column
+          Passport
+        %td
+          = "#{app['passport']}"
+      %tr
+        %td.label_column
+          Address
+        %td
+          = "#{app['address']}"
+      %tr
+        %td.label_column
+          Country
+        %td
+          = "#{app['country']}"
+      %tr
+        %td.label_column
+          Telephone
+        %td
+          = "#{app['telephone']}"
+      %tr
+        %td.label_column
+          Organization
+        %td
+          = "#{app['organization']}"
+      %tr
+        %td.label_column
+          About (public)
+        %td
+          %pre
+            = "#{app['about_public']}"
+      %tr
+        %td.label_column
+          About (private)
+        %td
+          %pre
+            = "#{app['about_private']}"
+      %tr
+        %td.label_column
+          Application data
+        %td
+          %pre
+            = "#{app['application_data']}"
+      %tr
+        %td.label_column
+          Application time
+        %td
+          = "#{app['app_time']}"

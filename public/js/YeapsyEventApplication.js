@@ -386,13 +386,13 @@ var EventApplication = {
 $(document).ready(function(){
 
     // When changing the state of an application trigger a submit
-    $($event_application_info).on(
+    $event_application_info.on(
         "change", 'select#event_application_state', function(){
             $(this).parents('form#event_application_edit').trigger('submit');
         }
     );
 
-    $($event_application_info).on(
+    $event_application_info.on(
         "click", 'input[name="archived"]', function(){
             $(this).parents('form#event_application_archive').trigger('submit');
         }
@@ -405,8 +405,16 @@ $(document).ready(function(){
       $event_application_info).submit(EventApplication.onSubmitArchive);
 
     // Trigger a new rating when clicking on a star
-    $($event_application_info).on('click', 'form#event_application_rate a',
+    $event_application_info.on('click', 'form#event_application_rate a',
                                     EventApplication.onSubmitRate);
+
+    $('button#export_event_applications', $event_applications).click(
+        function(){
+            var event_id = $event_info.attr('event_id');
+            var href = 'event/'+event_id+'/application/export';
+            window.location = href;
+        }
+    )
 
     $dt_event_applications = $('table#dt_event_applications',
                               $event_applications).dataTable({

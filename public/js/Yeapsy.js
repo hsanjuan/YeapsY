@@ -458,6 +458,20 @@ var Yeapsy = {
                     EventApplicationPool.actions.get(event_id,
                                                      EventApplicationPool.callbacks.get)
                     break;
+                case "event_applications":
+                    var event_id = hash_arr[1]
+                    EventApplicationPool.actions.get(event_id,
+                                                     EventApplicationPool.callbacks.get)
+                    showView('#event_applications', true, false)
+                    Event.actions.get(
+                        event_id,
+                        function(json){
+                            Event.callbacks.getEvent(json);
+                            Event.callbacks.getEventEdit(json);
+                        }
+                    );
+
+                    break;
                 case "application_info":
                     Application.actions.get(
                         hash_arr[1],

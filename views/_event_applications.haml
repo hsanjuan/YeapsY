@@ -2,6 +2,9 @@
   %div
     %h3#event_applications_title Applications for this event
     .top_actions
+      %button#export_event_applications{ :value => "#" }
+        %i.icon-save
+          = " Export applications to PDF (offline reading)"
       %button.show{ :value => "#event_info" }
         %i.icon-arrow-left
         = " Back to event"

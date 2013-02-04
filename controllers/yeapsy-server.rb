@@ -34,6 +34,7 @@ require 'yaml'
 require 'haml'
 require 'sequel'
 require 'warden'
+require 'pdfkit'
 require 'controllers/Yeapsy.rb'
 require 'controllers/YeapsyDB.rb'
 require 'controllers/YeapsyAuth.rb' #sets up warden
@@ -203,6 +204,7 @@ class YeapsyServer < Sinatra::Base
 
     post '/logout' do
         env['warden'].logout
+        "".to_json
     end
 
     get '/logout' do
@@ -299,6 +301,25 @@ class YeapsyServer < Sinatra::Base
 
     get '/event/:id/application' do
         @Yeapsy.get_event_applications(params[:id].to_i)
+    end
+
+    get '/event/:id/application/export' do
+        apps = @Yeapsy.get_event_applications(params[:id].to_i)
+        return apps if apps[0] != 200
+        apps = JSON.load(apps[1])
+        html = haml(:application_list_export,
+                    :locals => {
+                        :apps => apps,
+                        :event_name => Event[params[:id].to_i].name
+                    })
+
+        kit = PDFKit.new(html, :page_size => 'A4')
+        kit.stylesheets << File.join(settings.public_folder,
+                                     'css', 'yeapsy.css')
+
+        content_type 'application/pdf'
+        attachment('event_applications.pdf')
+        return kit.to_pdf
     end
 
     get '/event/:id/application/:app_id' do

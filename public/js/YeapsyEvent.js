@@ -485,7 +485,7 @@ $(document).ready(function(){
         // Update the title of the view
         $('h3#event_applications_title').text('Applications for "'+
                                               name+'"');
-        showView('#event_applications', true);
+        showView('#event_applications', true, id);
         EventApplicationPool.actions.get(id,EventApplicationPool.callbacks.get);
         return false;
     });
