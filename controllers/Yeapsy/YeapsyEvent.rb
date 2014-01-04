@@ -52,11 +52,11 @@ module YeapsyEvent
 
             #see events I have applied to which are not closed or disabled
             applied_to = User[@user_id].applications_dataset.map(:event_id)
-            events += Event.filter(:id => applied_to,
-                                   ~:state => [EVENT_ST[:disabled],
-                                               EVENT_ST[:closed]]).all
+            events += Event.filter(Sequel.expr(:id => applied_to) &
+                                   Sequel.~(:state => EVENT_ST[:disabled]) &
+                                   Sequel.~(:state => EVENT_ST[:closed])).all
 
-            events += Event.filter(:leaders.like("%#{@username}%")).all
+            events += Event.filter(Sequel.like(:leaders,"%#{@username}%")).all
             events.uniq! #remove duplicates
             return [200, events.to_json]
         rescue => e
