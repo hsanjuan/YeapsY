@@ -54,12 +54,12 @@
                         %i.icon-twitter
                           &nbsp;Follow&nbsp;YeapsY&nbsp;on&nbsp;Twitter
                   %tr
-                    %td{ :style => "border: none" }
+                    %td{ :style => "border: none;"}
                       %p
                         %b Latest news from Twitter:
-                      %ul#tweets
-                        %li Loading latest news from Twitter...
-          
+                  %tr
+                    %td{ :style => "border: none;text-align: center" }
+                      = '<a class="twitter-timeline" href="https://twitter.com/YeapsY" data-widget-id="419450725832200192" data-tweet-limit="2" width="300" >Tweets by @YeapsY</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>'
 
         %td{ :style => "vertical-align: top; width: 50%; padding-left: 25px" }
           %table.table_dashboard
