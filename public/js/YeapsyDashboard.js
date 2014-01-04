@@ -26,15 +26,16 @@ function dashboardCleanup(){
 };
 
 $(document).ready(function(){
-    $.getJSON('https://api.twitter.com/1/statuses/user_timeline.json?callback=?&include_entities=false&include_rts=false&screen_name=yeapsy&count=3',
-              function(statuses){
-                  var tw = $('ul#tweets', $dashboard);
-                  tw.empty();
-                  for (var i=0; i< statuses.length; i++){
-                      var st = statuses[i]
-                      tw.append('<li>- <i>'+ 
-                                Yeapsy.helper.parseTwitterDate(st.created_at)
-                                + '</i>: ' + st.text + '</li>');
-                  }
-              });
+    // $.getJSON('https://api.twitter.com/1/statuses/user_timeline.json?callback=?&include_entities=false&include_rts=false&screen_name=yeapsy&count=3',
+    //           function(statuses){
+    //               var tw = $('ul#tweets', $dashboard);
+    //               tw.empty();
+    //               for (var i=0; i< statuses.length; i++){
+    //                   var st = statuses[i]
+    //                   tw.append('<li>- <i>'+
+    //                             Yeapsy.helper.parseTwitterDate(st.created_at)
+    //                             + '</i>: ' + st.text + '</li>');
+    //               }
+    //           });
+    // Disabled as twitter has deprecated v1 api
 });
