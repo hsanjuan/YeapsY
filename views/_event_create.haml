@@ -88,6 +88,8 @@
                   %select#create_event_countries{:name => "country",
                                                  :required => "required" }
                     %option
+                      = # fix html5 validator
+                      = " "
 
           %fieldset
             %legend Dates
