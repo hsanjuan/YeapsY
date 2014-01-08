@@ -73,7 +73,7 @@ var YeapsyAuth = {
                 data: JSON.stringify(data),
                 success: YeapsyAuth.callbacks.reminder,
                 error: function(err){
-                    if (error.status === 204) {
+                    if (err.status === 204) {
                         YeapsyAuth.callbacks.reminder()
                     }
                     else {
