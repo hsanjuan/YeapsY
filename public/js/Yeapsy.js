@@ -72,7 +72,12 @@ var Yeapsy = {
                        cb(res);
                },
                error: function(err){
-                   Yeapsy.helper.onError(err.responseText);
+                   if (err.status === 204){
+                       if(cb)
+                           cb();
+                   } else {
+                       Yeapsy.helper.onError(err.responseText);
+                   }
                },
                beforeSend: Yeapsy.helper.waitOn,
                complete: function(){

@@ -215,16 +215,13 @@ class YeapsyServer < Sinatra::Base
     # An email is sent with the feedback message to the contact address
     post '/feedback' do
         begin
-
-            contact_address = settings.yeapsy_config[:contact]
-            from_address    = settings.yeapsy_config[:email_from]
             user_email = User[@user_id].email
             message = Yeapsy.parse_json(request.body.read)[:feedback]
 
-            mail.send(from_address,
-                      contact_address,
-                      "Yeapsy feedback from #{user_email}",
-                      message)
+            settings.mail.send(nil,
+                               nil,
+                               "Yeapsy feedback from #{user_email}",
+                               message)
             204
         rescue => e
             return YeapsyError.new('An error occurred',
