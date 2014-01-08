@@ -216,12 +216,13 @@ class YeapsyServer < Sinatra::Base
     post '/feedback' do
         begin
 
-            contact = settings.yeapsy_config[:contact]
+            contact_address = settings.yeapsy_config[:contact]
+            from_address    = settings.yeapsy_config[:email_from]
             user_email = User[@user_id].email
             message = Yeapsy.parse_json(request.body.read)[:feedback]
 
-            mail.send(contact,
-                      contact,
+            mail.send(from_address,
+                      contact_address,
                       "Yeapsy feedback from #{user_email}",
                       message)
             204
