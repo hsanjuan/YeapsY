@@ -74,7 +74,7 @@ var YeapsyAuth = {
                 success: YeapsyAuth.callbacks.reminder,
                 error: function(err){
                     if (error.status === 204) {
-                        YeapsyAuth.callbacks.reminder,
+                        YeapsyAuth.callbacks.reminder()
                     }
                     else {
                         Yeapsy.helper.onError(err.responseText);
