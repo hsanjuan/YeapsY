@@ -278,16 +278,16 @@ class YeapsyServer < Sinatra::Base
         begin
             haml :_ToS, :layout => :layout_simple
         rescue
-            [404, haml(:error404, layout => :layout_simple)]
+            [404, haml(:error404, :layout => :layout_simple)]
         end
     end
 
     get '/privacy' do
         content_type 'text/html'
         begin
-            haml :privacy_policy, :layout => :layout_simple
+            haml :_privacy_policy, :layout => :layout_simple
         rescue
-            [404, haml(:error404, layout => :layout_simple)]
+            [404, haml(:error404, :layout => :layout_simple)]
         end
     end
 
