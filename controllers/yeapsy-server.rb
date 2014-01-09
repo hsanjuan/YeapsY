@@ -98,7 +98,6 @@ class YeapsyServer < Sinatra::Base
                             ]
 
             route = path == '/' ? [method, '/'] : [method, path.split('/')[1]]
-
             return public_routes.include?(route)
         end
 
@@ -294,6 +293,7 @@ class YeapsyServer < Sinatra::Base
     # Routes for YEAPSY resources
 
     get '/:resource' do
+        halt 404 if @Yeapsy.nil?
         @Yeapsy.list(params[:resource])
     end
 
@@ -332,6 +332,7 @@ class YeapsyServer < Sinatra::Base
     end
 
     get '/:resource/:id' do
+        halt 404 if @Yeapsy.nil?
         @Yeapsy.get(params[:resource],params[:id].to_i)
     end
 
