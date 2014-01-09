@@ -140,11 +140,11 @@ module YeapsyUser
             user.update_fields(info_hash,fields, {:missing => :skip})
             return [200, user.to_json(:except => :password)]
         rescue Sequel::Error => e
-            return YeapsyError.new("Error creating user",
+            return YeapsyError.new("Error modifying user",
                                    e.message,
                                    403).to_json
         rescue => e
-            return YeapsyError.new("Error modifiying user",
+            return YeapsyError.new("Error modifying user",
                                    e.message, 500).to_json
         end
     end

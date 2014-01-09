@@ -49,6 +49,11 @@ class User < Sequel::Model
             string << 'and contain only alphanumeric characters'
             errors.add(:username, string)
         end
+
+        # Check that we have a valid birthdate
+        if birth_date && !birth_date.is_a?(Time)
+            errors.add(:birth_date, "format is incorrect")
+        end
     end
 
     # Setter for password, cook it before

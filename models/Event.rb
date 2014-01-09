@@ -41,6 +41,18 @@ class Event < Sequel::Model
         validates_unique :name
 
         errors.add(:state, 'is not valid') if state && !(state>=0 && state<=5)
-    end
 
+        # Check that we have a valid start and end dates
+        if date_start && !date_start.is_a?(Time)
+            errors.add(:date_start, "format is incorrect")
+        end
+
+        if date_end && !date_end.is_a?(Time)
+            errors.add(:date_end, "format is incorrect")
+        end
+
+        if app_deadline && !app_deadline.is_a?(Time)
+            errors.add(:app_deadline, "format is incorrect")
+        end
+    end
 end
