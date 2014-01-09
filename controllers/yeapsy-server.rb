@@ -357,7 +357,7 @@ class YeapsyServer < Sinatra::Base
     not_found do
         # Return html view if first preference is html
         # otherwise stick to json
-        if request.accept[0] == 'text/html'
+        if request.accept[0].to_s == 'text/html'
             content_type 'text/html'
             return haml :error404, :layout => :layout_simple
         else
