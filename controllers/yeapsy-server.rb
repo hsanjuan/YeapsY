@@ -314,6 +314,8 @@ class YeapsyServer < Sinatra::Base
         kit = PDFKit.new(html, :page_size => 'A4')
         kit.stylesheets << File.join(settings.public_folder,
                                      'css', 'yeapsy.css')
+        kit.stylesheets << File.join(settings.public_folder,
+                                     'css', 'print.css')
 
         content_type 'application/pdf'
         attachment('event_applications.pdf')
